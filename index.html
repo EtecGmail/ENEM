@@ -19,7 +19,7 @@
     <link rel='stylesheet' href='styles/layouts/_sidebar.css'>
     <link rel='stylesheet' href='styles/layouts/_grid.css'>
     <link rel='stylesheet' href='styles/layouts/_navigation.css'>
-    <link rel='stylesheet' href='styles/pages/_dashboard.css'>
+    <link rel='stylesheet' href='styles/pages/_landing.css'>
 </head>
 <body>
     <div class='app-container'>
@@ -34,9 +34,11 @@
                 <nav class='main-nav' aria-label='Navegação principal'>
                     <ul class='nav-list'>
                         <li><a href='#inicio' class='nav-link active'>Início</a></li>
-                        <li><a href='#trilhas' class='nav-link'>Trilhas</a></li>
-                        <li><a href='#redacao' class='nav-link'>Redação</a></li>
-                        <li><a href='#simulados' class='nav-link'>Simulados</a></li>
+                        <li><a href='#como-funciona' class='nav-link'>Como funciona</a></li>
+                        <li><a href='#para-quem' class='nav-link'>Para quem é</a></li>
+                        <li><a href='#quem-corrige' class='nav-link'>Quem corrige você</a></li>
+                        <li><a href='#planos' class='nav-link'>Planos</a></li>
+                        <li><a href='#garantia' class='nav-link'>Garantia & LGPD</a></li>
                     </ul>
                 </nav>
 
@@ -57,16 +59,16 @@
         <!-- Main Content -->
         <main class='main-content' role='main'>
             <!-- Hero Section -->
-            <section class='hero' aria-labelledby='hero-title'>
+            <section class='hero' id='inicio' aria-labelledby='hero-title'>
                 <div class='hero-content'>
                     <h1 id='hero-title' class='hero-title'>
-                        Chegou sua hora de brilhar no ENEM
+                        Clube da Redação ENEM com o <span>Método Soraia</span>
                     </h1>
                     <p class='hero-subtitle'>
-                        Aprenda Português e Redação com quem entende do assunto. 
-                        Metodologia humanizada que se adapta à sua realidade.
+                        Metodologia humanizada, rubrica fiel ao ENEM e planos de ação
+                        personalizados para você transformar feedback em nota 1000.
                     </p>
-                    
+
                     <div class='hero-actions'>
                         <button
                             class='btn-primary btn-large'
@@ -77,54 +79,279 @@
                             Criar minha conta gratuita
                         </button>
                         <button class='btn-ghost btn-large' id='cta-secondary'>
-                            Conhecer a plataforma
+                            Ver planos e preços
                         </button>
                     </div>
 
                     <div class='hero-features'>
                         <div class='feature-item'>
                             <span class='feature-icon'>🎯</span>
-                            <span>Correção de redação humanizada</span>
+                            <span>Correções em até 48h úteis no plano Premium</span>
                         </div>
                         <div class='feature-item'>
-                            <span class='feature-icon'>⏱️</span>
-                            <span>Para quem tem pouco tempo</span>
+                            <span class='feature-icon'>🧭</span>
+                            <span>Plano de estudos após cada feedback</span>
                         </div>
                         <div class='feature-item'>
-                            <span class='feature-icon'>📱</span>
-                            <span>Funciona no celular</span>
+                            <span class='feature-icon'>🔒</span>
+                            <span>LGPD e auditoria em todos os acessos</span>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Features Section -->
-            <section class='features' aria-labelledby='features-title'>
-                <h2 id='features-title' class='section-title'>Como vamos te ajudar a chegar na nota 1000</h2>
-                
-                <div class='features-grid'>
-                    <div class='feature-card'>
-                        <div class='feature-icon'>✍️</div>
-                        <h3>Redação Comentada</h3>
-                        <p>Correções detalhadas por competências do ENEM, com sugestões práticas de melhoria</p>
+            <section class='section section-alt' id='como-funciona' aria-labelledby='process-title'>
+                <div class='section-content'>
+                    <div class='section-header'>
+                        <h2 id='process-title' class='section-title'>Como funciona o Clube da Redação ENEM</h2>
+                        <p class='section-subtitle'>
+                            Uma jornada enxuta, humanizada e sustentável para garantir evolução contínua em cada envio.
+                        </p>
                     </div>
-                    
-                    <div class='feature-card'>
-                        <div class='feature-icon'>📚</div>
-                        <h3>Trilhas Personalizadas</h3>
-                        <p>Conteúdo organizado de acordo com seu nível e objetivos de estudo</p>
+
+                    <div class='process-grid'>
+                        <article class='process-card'>
+                            <span class='process-step'>1</span>
+                            <h3>Envie sua redação do seu jeito</h3>
+                            <p>
+                                Faça upload em PDF, DOCX ou texto digitado. Manuscritas digitalizadas também entram se estiverem legíveis.
+                            </p>
+                        </article>
+                        <article class='process-card'>
+                            <span class='process-step'>2</span>
+                            <h3>Correção pelo Método Soraia</h3>
+                            <p>
+                                Corretores certificados analisam cada competência do ENEM, cruzam repertório sociocultural e sugerem ajustes práticos.
+                            </p>
+                        </article>
+                        <article class='process-card'>
+                            <span class='process-step'>3</span>
+                            <h3>Plano de ação imediato</h3>
+                            <p>
+                                Você recebe nota técnica, feedback humanizado e um plano de estudo personalizado para a próxima redação.
+                            </p>
+                        </article>
                     </div>
-                    
-                    <div class='feature-card'>
-                        <div class='feature-icon'>🎥</div>
-                        <h3>Aulas Objetivas</h3>
-                        <p>Videoaulas curtas e direto ao ponto, perfeitas para estudar no ônibus</p>
+                </div>
+            </section>
+
+            <section class='section' id='para-quem' aria-labelledby='audience-title'>
+                <div class='section-content'>
+                    <div class='section-header'>
+                        <h2 id='audience-title' class='section-title'>Para quem é</h2>
+                        <p class='section-subtitle'>
+                            Planos pensados para estudantes individuais, escolas e redes que precisam de escala sem abrir mão da qualidade.
+                        </p>
                     </div>
-                    
-                    <div class='feature-card'>
-                        <div class='feature-icon'>📊</div>
-                        <h3>Monitoramento de Evolução</h3>
-                        <p>Acompanhe seu progresso com relatórios simples e claros</p>
+
+                    <div class='audience-grid'>
+                        <article class='audience-card'>
+                            <h3>Estudante Autônomo</h3>
+                            <ul>
+                                <li>Trilhas personalizadas para rotina apertada</li>
+                                <li>Correções em até 72h úteis com devolutiva acolhedora</li>
+                                <li>Modelos de parágrafo quando o erro é estrutural</li>
+                            </ul>
+                        </article>
+                        <article class='audience-card'>
+                            <h3>Escola Particular</h3>
+                            <ul>
+                                <li>Integração com LMS e dashboards por turma</li>
+                                <li>Capacitação docente e relatórios trimestrais</li>
+                                <li>Créditos extras para simulações intensivas</li>
+                            </ul>
+                        </article>
+                        <article class='audience-card'>
+                            <h3>Redes Públicas e ONGs</h3>
+                            <ul>
+                                <li>Formação de corretores locais com supervisão</li>
+                                <li>Módulos offline para regiões com baixa conectividade</li>
+                                <li>Mentorias e cláusulas de confidencialidade inclusas</li>
+                            </ul>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class='section section-alt' id='quem-corrige' aria-labelledby='team-title'>
+                <div class='section-content'>
+                    <div class='section-header'>
+                        <h2 id='team-title' class='section-title'>Quem corrige você</h2>
+                        <p class='section-subtitle'>
+                            Uma equipe enxuta e especializada garante consistência, empatia e rigor acadêmico em cada devolutiva.
+                        </p>
+                    </div>
+
+                    <div class='team-grid'>
+                        <article class='team-card'>
+                            <span>Coordenação pedagógica</span>
+                            <h3>Profa. Soraia Almeida</h3>
+                            <p>
+                                Responsável pela rubrica proprietária, curadoria de repertório sociocultural e validação das notas.
+                            </p>
+                        </article>
+                        <article class='team-card'>
+                            <span>Corretores certificados</span>
+                            <h3>Time Método Soraia</h3>
+                            <p>
+                                Especialistas treinados em humanização do feedback, com auditoria contínua de qualidade e aderência ao ENEM.
+                            </p>
+                        </article>
+                        <article class='team-card'>
+                            <span>Analistas de dados</span>
+                            <h3>Squad de evolução</h3>
+                            <p>
+                                Transformam cada feedback em indicadores claros, sugerindo estudos direcionados e medindo satisfação pós-correção.
+                            </p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class='section' id='feedback' aria-labelledby='feedback-title'>
+                <div class='section-content'>
+                    <div class='section-header'>
+                        <h2 id='feedback-title' class='section-title'>Como chega o seu feedback</h2>
+                        <p class='section-subtitle'>
+                            Exemplo realista de devolutiva com nota técnica, comentários humanizados e plano de ação imediato.
+                        </p>
+                    </div>
+
+                    <div class='feedback-wrapper'>
+                        <article class='feedback-card' aria-label='Exemplo de feedback de redação'>
+                            <div class='feedback-header'>
+                                <div>
+                                    <h3>Redação sobre educação ambiental</h3>
+                                    <p>Enviada por Ana (Plano Avançado) · 72h úteis de SLA</p>
+                                </div>
+                                <dl class='feedback-score'>
+                                    <div>
+                                        <dt>Nota ENEM simulada</dt>
+                                        <dd>920</dd>
+                                    </div>
+                                </dl>
+                            </div>
+                            <div class='feedback-body'>
+                                <p>
+                                    <strong>Competência II:</strong> repertório consistente com referência à Política Nacional de Resíduos Sólidos. Continue ampliando repertório socioambiental com estudos de caso regionais.
+                                </p>
+                                <p>
+                                    <strong>Competência III:</strong> mantenha a progressão lógica utilizando conectores de consequência. Veja o modelo sugerido no parágrafo 2.
+                                </p>
+                                <p>
+                                    <strong>Plano de ação:</strong> revise a aula curta “Argumentação baseada em evidências” e entregue a próxima redação com foco na proposta de intervenção em até 7 dias.
+                                </p>
+                            </div>
+                        </article>
+                        <aside class='feedback-card' aria-label='Resumo das competências avaliadas'>
+                            <div class='feedback-header'>
+                                <div>
+                                    <h3>Matriz de competências</h3>
+                                    <p>Notas por critério oficial do ENEM</p>
+                                </div>
+                            </div>
+                            <dl class='feedback-score'>
+                                <div>
+                                    <dt>Competência I</dt>
+                                    <dd>200/200</dd>
+                                </div>
+                                <div>
+                                    <dt>Competência II</dt>
+                                    <dd>180/200</dd>
+                                </div>
+                                <div>
+                                    <dt>Competência III</dt>
+                                    <dd>180/200</dd>
+                                </div>
+                                <div>
+                                    <dt>Competência IV</dt>
+                                    <dd>180/200</dd>
+                                </div>
+                                <div>
+                                    <dt>Competência V</dt>
+                                    <dd>180/200</dd>
+                                </div>
+                            </dl>
+                        </aside>
+                    </div>
+                </div>
+            </section>
+
+            <section class='section section-alt' id='planos' aria-labelledby='pricing-title'>
+                <div class='section-content'>
+                    <div class='section-header'>
+                        <h2 id='pricing-title' class='section-title'>Planos e preços</h2>
+                        <p class='section-subtitle'>
+                            Escolha o plano que cabe na sua rotina. Todos incluem nota técnica por competência, feedback humanizado e histórico completo.
+                        </p>
+                    </div>
+
+                    <div class='pricing-grid'>
+                        <article class='pricing-card'>
+                            <div class='plan-header'>
+                                <span class='plan-name'>Essencial</span>
+                                <span class='plan-price'>R$ 97/mês</span>
+                                <span class='plan-tagline'>Até 2 redações mensais · Correção em 72h úteis</span>
+                            </div>
+                            <ul class='plan-features'>
+                                <li>Feedback completo com plano de estudo personalizado</li>
+                                <li>Modelo de parágrafo quando houver erro estrutural</li>
+                                <li>Acesso às trilhas fundamentais do Método Soraia</li>
+                            </ul>
+                            <button class='btn-ghost btn-full'>Começar no Essencial</button>
+                        </article>
+
+                        <article class='pricing-card highlight'>
+                            <div class='plan-header'>
+                                <span class='plan-name'>Avançado</span>
+                                <span class='plan-price'>R$ 157/mês</span>
+                                <span class='plan-tagline'>Até 4 redações mensais · Correção em 72h úteis</span>
+                            </div>
+                            <ul class='plan-features'>
+                                <li>Mentorias coletivas mensais com a equipe pedagógica</li>
+                                <li>Monitoramento de evolução com indicadores personalizados</li>
+                                <li>Créditos extras com 10% de desconto</li>
+                            </ul>
+                            <button class='btn-primary btn-full'>Assinar o Avançado</button>
+                        </article>
+
+                        <article class='pricing-card'>
+                            <div class='plan-header'>
+                                <span class='plan-name'>Premium</span>
+                                <span class='plan-price'>R$ 247/mês</span>
+                                <span class='plan-tagline'>Até 8 redações mensais · Correção em 48h úteis</span>
+                            </div>
+                            <ul class='plan-features'>
+                                <li>Prioridade máxima na fila de correção</li>
+                                <li>Planos de ação quinzenais revisados por especialista</li>
+                                <li>Suporte dedicado via WhatsApp de segunda a sábado</li>
+                            </ul>
+                            <button class='btn-ghost btn-full'>Garantir minha vaga Premium</button>
+                        </article>
+                    </div>
+
+                    <p class='section-subtitle'>Planos B2B/B2G com limites personalizados sob consulta.</p>
+                </div>
+            </section>
+
+            <section class='section' id='garantia' aria-labelledby='guarantee-title'>
+                <div class='section-content'>
+                    <div class='lgpd-banner'>
+                        <div class='section-header'>
+                            <h3 id='guarantee-title'>Garantia tranquila & compromisso com a LGPD</h3>
+                            <p>
+                                Teste por 7 dias. Se não enxergar evolução concreta, devolvemos 100% do valor investido, sem burocracia.
+                            </p>
+                        </div>
+                        <div class='lgpd-content'>
+                            <h4>Nosso pacto com seus dados</h4>
+                            <ul>
+                                <li>Acesso restrito a corretores certificados e registrado em trilha de auditoria</li>
+                                <li>Criptografia em repouso (AES-256) e em trânsito (TLS 1.2+)</li>
+                                <li>Anonimização ou exclusão em até 30 dias após encerramento de contrato</li>
+                                <li>Solicite exclusão definitiva e respondemos em no máximo 15 dias</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </section>

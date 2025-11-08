@@ -1,1 +1,64 @@
-/* Add your styles here */
+/* Escala tipográfica base */
+body {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  font-weight: var(--font-weight-normal);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  color: var(--color-neutral-900);
+  margin-bottom: var(--spacing-3);
+}
+
+h1 { font-size: var(--font-size-4xl); }
+h2 { font-size: var(--font-size-3xl); }
+h3 { font-size: var(--font-size-2xl); }
+h4 { font-size: var(--font-size-xl); }
+h5 { font-size: var(--font-size-lg); }
+h6 { font-size: var(--font-size-base); }
+
+p {
+  margin-bottom: var(--spacing-3);
+  color: var(--color-neutral-700);
+}
+
+small,
+.form-help {
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-600);
+}
+
+strong {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-neutral-900);
+}
+
+code,
+pre {
+  font-family: var(--font-family-mono);
+}
+
+a {
+  color: var(--color-primary);
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--color-primary-dark);
+}
+
+.lead {
+  font-size: var(--font-size-lg);
+  color: var(--color-neutral-600);
+}
+
+.text-center { text-align: center; }
+.text-right { text-align: right; }

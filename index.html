@@ -355,6 +355,50 @@
                     </div>
                 </div>
             </section>
+
+            <section class='section section-alt legal-section' aria-labelledby='legal-title'>
+                <div class='section-content legal-content'>
+                    <div class='section-header'>
+                        <h2 id='legal-title' class='section-title'>Transparência legal e proteção de dados</h2>
+                        <p class='section-subtitle'>Entenda em linguagem direta como cuidamos do seu contrato, da sua privacidade e da sua segurança digital.</p>
+                    </div>
+
+                    <div class='legal-grid'>
+                        <article id='termos' class='legal-card' aria-labelledby='termos-title'>
+                            <h3 id='termos-title'>Termos de Uso</h3>
+                            <p>O serviço é renovado mensalmente, com cancelamento simples e sem multas. Você mantém o acesso às correções até o fim do período vigente.</p>
+                            <ul>
+                                <li>Pagamentos recorrentes mensais ou anuais, com nota fiscal emitida automaticamente.</li>
+                                <li>Reembolso integral até 7 dias após a contratação inicial.</li>
+                                <li>Uso exclusivo para fins educacionais. Compartilhamento de login bloqueia o acesso.</li>
+                            </ul>
+                            <p>Precisa do contrato completo? Solicite o PDF com todas as cláusulas pelo e-mail <a href='mailto:legal@redacaomais.com'>legal@redacaomais.com</a>.</p>
+                        </article>
+
+                        <article id='privacidade' class='legal-card' aria-labelledby='privacidade-title'>
+                            <h3 id='privacidade-title'>Política de Privacidade</h3>
+                            <p>Coletamos apenas os dados necessários para o cadastro, emissão de nota fiscal e entrega das correções personalizadas.</p>
+                            <ul>
+                                <li>Dados armazenados em nuvem com criptografia AES-256 e TLS 1.2+.</li>
+                                <li>Acesso restrito a corretores certificados e auditado a cada feedback.</li>
+                                <li>Solicite revisão, portabilidade ou exclusão definitiva a qualquer momento.</li>
+                            </ul>
+                            <p>Confira o resumo completo de privacidade na área do aluno ou peça a versão extensa pelo nosso suporte.</p>
+                        </article>
+
+                        <article id='lgpd' class='legal-card' aria-labelledby='lgpd-title'>
+                            <h3 id='lgpd-title'>LGPD na prática</h3>
+                            <p>Pedimos consentimento explícito para tratar seus dados e mantemos registro de todas as finalidades, conforme a Lei 13.709/2018.</p>
+                            <ul>
+                                <li>Base legal principal: execução de contrato e consentimento informado.</li>
+                                <li>Encerramento e anonimização garantidos em até 30 dias após o término do plano.</li>
+                                <li>Encarregado de dados disponível pelo e-mail <a href='mailto:dpo@redacaomais.com'>dpo@redacaomais.com</a>.</li>
+                            </ul>
+                            <p>Veja o histórico de consentimento na sua conta ou solicite relatório de tratamento de dados sempre que precisar.</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
         </main>
 
         <!-- Footer -->
@@ -409,27 +453,50 @@
             <form class='signup-form' id='signup-form'>
                 <div class='form-group'>
                     <label for='nome-completo' class='form-label'>Nome completo</label>
-                    <input type='text' id='nome-completo' name='nome-completo' class='input' required>
+                    <input
+                        type='text'
+                        id='nome-completo'
+                        name='nome-completo'
+                        class='input'
+                        required
+                        autocomplete='name'
+                    >
                 </div>
                 
                 <div class='form-group'>
                     <label for='email' class='form-label'>E-mail</label>
-                    <input type='email' id='email' name='email' class='input' required>
+                    <input
+                        type='email'
+                        id='email'
+                        name='email'
+                        class='input'
+                        required
+                        autocomplete='email'
+                    >
                 </div>
                 
                 <div class='form-group'>
                     <label for='senha' class='form-label'>Senha</label>
-                    <input type='password' id='senha' name='senha' class='input' required minlength='6'>
-                    <small class='form-help'>Mínimo 6 caracteres</small>
+                    <input
+                        type='password'
+                        id='senha'
+                        name='senha'
+                        class='input'
+                        required
+                        minlength='6'
+                        aria-describedby='senha-help'
+                        autocomplete='new-password'
+                    >
+                    <small id='senha-help' class='form-help'>Mínimo 6 caracteres</small>
                 </div>
                 
                 <div class='form-group'>
                     <label class='checkbox-label'>
-                        <input type='checkbox' name='lgpd' required>
+                        <input type='checkbox' id='lgpd-consent' name='lgpd' required>
                         <span>Concordo com os <a href='#termos'>Termos de Uso</a> e <a href='#privacidade'>Política de Privacidade</a></span>
                     </label>
                 </div>
-                
+
                 <button type='submit' class='btn-primary btn-full'>Criar conta</button>
             </form>
         </div>

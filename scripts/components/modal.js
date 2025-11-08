@@ -1,63 +1,127 @@
+const SIGNUP_MESSAGES = {
+  required: 'Este campo é obrigatório',
+  email: 'Por favor, insira um e-mail válido',
+  password: 'A senha deve ter pelo menos 6 caracteres',
+  consent: 'Você precisa concordar com o tratamento dos dados para continuar.'
+};
+
+function isValidEmail(email = '') {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+function validateSignupData(values = {}) {
+  const name = (values['nome-completo'] || values.nome || '').trim();
+  const email = (values.email || '').trim();
+  const password = (values.senha || '').trim();
+  const consentValue =
+    typeof values.lgpd !== 'undefined' ? values.lgpd : values.consent;
+  const consent = Boolean(consentValue);
+
+  const errors = {};
+
+  if (!name) {
+    errors.nome = SIGNUP_MESSAGES.required;
+  }
+
+  if (!email) {
+    errors.email = SIGNUP_MESSAGES.required;
+  } else if (!isValidEmail(email)) {
+    errors.email = SIGNUP_MESSAGES.email;
+  }
+
+  if (!password) {
+    errors.senha = SIGNUP_MESSAGES.required;
+  } else if (password.length < 6) {
+    errors.senha = SIGNUP_MESSAGES.password;
+  }
+
+  if (!consent) {
+    errors.consent = SIGNUP_MESSAGES.consent;
+  }
+
+  return {
+    isValid: Object.keys(errors).length === 0,
+    errors
+  };
+}
+
 // Sistema de Modal Acessível
 class ModalSystem {
   constructor() {
     this.modals = new Map();
     this.currentModal = null;
     this.previouslyFocused = null;
+    this.handleClick = this.handleClick.bind(this);
+    this.handleKeydown = this.handleKeydown.bind(this);
     this.init();
   }
 
   init() {
-    // Registrar modais automaticamente
+    if (typeof document === 'undefined') return;
+
     document.querySelectorAll('[data-modal]').forEach(modal => {
       this.registerModal(modal.id, modal);
     });
 
-    // Event listeners
-    document.addEventListener('click', this.handleClick.bind(this));
-    document.addEventListener('keydown', this.handleKeydown.bind(this));
+    document.addEventListener('click', this.handleClick);
+    document.addEventListener('keydown', this.handleKeydown);
   }
 
   registerModal(id, element) {
-    this.modals.set(id, {
+    if (!id || !element) return;
+
+    element.setAttribute('aria-hidden', element.getAttribute('aria-hidden') ?? 'true');
+    if (!element.style.display) {
+      element.style.display = 'none';
+    }
+
+    const modalData = {
       element,
       triggers: document.querySelectorAll(`[data-target="${id}"]`),
       closeButtons: element.querySelectorAll('[data-dismiss="modal"]')
-    });
+    };
 
-    // Configurar triggers
-    const modalData = this.modals.get(id);
+    this.modals.set(id, modalData);
+
     modalData.triggers.forEach(trigger => {
-      trigger.addEventListener('click', () => this.open(id));
+      trigger.addEventListener('click', event => {
+        if (event) event.preventDefault();
+        this.open(id, trigger);
+      });
     });
 
-    // Configurar botões de fechar
     modalData.closeButtons.forEach(button => {
-      button.addEventListener('click', () => this.close());
+      button.addEventListener('click', event => {
+        if (event) event.preventDefault();
+        this.close();
+      });
     });
   }
 
-  open(modalId) {
+  open(modalId, trigger = null) {
     if (this.currentModal) this.close();
 
     const modalData = this.modals.get(modalId);
     if (!modalData) return;
 
     this.currentModal = modalData;
-    this.previouslyFocused = document.activeElement;
+    this.previouslyFocused = trigger || document.activeElement;
 
-    // Mostrar modal
     modalData.element.setAttribute('aria-hidden', 'false');
     modalData.element.style.display = 'flex';
 
-    // Focar no modal
-    const focusable = modalData.element.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
-    if (focusable) focusable.focus();
+    const focusable = modalData.element.querySelector(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    if (focusable && typeof focusable.focus === 'function') {
+      focusable.focus();
+    }
 
-    // Prevenir scroll do body
-    document.body.style.overflow = 'hidden';
+    if (typeof document !== 'undefined' && document.body) {
+      document.body.style.overflow = 'hidden';
+    }
 
-    // Evento customizado
     this.dispatchEvent('modal:open', { modalId });
   }
 
@@ -65,20 +129,18 @@ class ModalSystem {
     if (!this.currentModal) return;
 
     const { element } = this.currentModal;
-    
-    // Esconder modal
+
     element.setAttribute('aria-hidden', 'true');
     element.style.display = 'none';
 
-    // Restaurar scroll
-    document.body.style.overflow = '';
+    if (typeof document !== 'undefined' && document.body) {
+      document.body.style.overflow = '';
+    }
 
-    // Restaurar foco
-    if (this.previouslyFocused) {
+    if (this.previouslyFocused && typeof this.previouslyFocused.focus === 'function') {
       this.previouslyFocused.focus();
     }
 
-    // Evento customizado
     this.dispatchEvent('modal:close', { modalId: element.id });
 
     this.currentModal = null;
@@ -86,21 +148,21 @@ class ModalSystem {
   }
 
   handleClick(event) {
-    // Fechar ao clicar no overlay
-    if (this.currentModal && event.target === this.currentModal.element) {
+    if (!event || !this.currentModal) return;
+
+    if (event.target === this.currentModal.element) {
       this.close();
     }
   }
 
   handleKeydown(event) {
-    if (!this.currentModal) return;
+    if (!event || !this.currentModal) return;
 
-    // ESC para fechar
     if (event.key === 'Escape') {
       this.close();
+      return;
     }
 
-    // Manter foco dentro do modal
     if (event.key === 'Tab') {
       this.trapFocus(event);
     }
@@ -122,49 +184,68 @@ class ModalSystem {
         lastElement.focus();
         event.preventDefault();
       }
-    } else {
-      if (document.activeElement === lastElement) {
-        firstElement.focus();
-        event.preventDefault();
-      }
+    } else if (document.activeElement === lastElement) {
+      firstElement.focus();
+      event.preventDefault();
     }
   }
 
   dispatchEvent(name, detail) {
+    if (typeof document === 'undefined') return;
     const event = new CustomEvent(name, { detail });
     document.dispatchEvent(event);
   }
 }
 
-// Inicializar sistema de modais
-document.addEventListener('DOMContentLoaded', () => {
-  window.modalSystem = new ModalSystem();
-});
+class SignupFormManager {
+  constructor(formSelector = '#signup-form', options = {}) {
+    this.form = typeof formSelector === 'string'
+      ? document.querySelector(formSelector)
+      : formSelector;
 
-// Modal específico para cadastro
-class SignupModal {
-  constructor() {
-    this.form = document.getElementById('signup-form');
+    this.submitter = options.submitter || (formData => this.submitForm(formData));
+    this.successRedirect = options.successRedirect || 'onboarding.html';
+    this.onSuccess =
+      typeof options.onSuccess === 'function'
+        ? options.onSuccess
+        : url => {
+            if (typeof window !== 'undefined') {
+              window.location.href = url;
+            }
+          };
+    this.onError = typeof options.onError === 'function' ? options.onError : null;
+
     this.init();
   }
 
   init() {
-    if (this.form) {
-      this.form.addEventListener('submit', this.handleSubmit.bind(this));
-      
-      // Configurar validação em tempo real
-      this.setupValidation();
-    }
+    if (!this.form) return;
+
+    this.form.setAttribute('novalidate', 'true');
+    this.form.addEventListener('submit', event => this.handleSubmit(event));
+    this.setupValidation();
+  }
+
+  getRequiredFields() {
+    if (!this.form) return [];
+    return Array.from(this.form.querySelectorAll('input[required]'));
   }
 
   setupValidation() {
-    if (!this.form) return;
-
-    const fields = this.form.querySelectorAll('input[required]');
+    const fields = this.getRequiredFields();
 
     fields.forEach(field => {
       field.addEventListener('blur', () => this.validateField(field));
-      field.addEventListener('input', () => this.clearError(field));
+
+      if (field.type === 'checkbox') {
+        field.addEventListener('change', () => {
+          if (field.checked) {
+            this.clearError(field);
+          }
+        });
+      } else {
+        field.addEventListener('input', () => this.clearError(field));
+      }
     });
   }
 
@@ -173,80 +254,116 @@ class SignupModal {
 
     this.clearError(field);
 
+    if (field.type === 'checkbox') {
+      if (!field.checked) {
+        this.showError(field, SIGNUP_MESSAGES.consent);
+        return false;
+      }
+      return true;
+    }
+
     const value = (field.value || '').trim();
 
-    if (value.length === 0) {
-      this.showError(field, 'Este campo é obrigatório');
+    if (field.hasAttribute('required') && value.length === 0) {
+      this.showError(field, SIGNUP_MESSAGES.required);
       return false;
     }
 
-    if (field.type === 'email' && !this.isValidEmail(value)) {
-      this.showError(field, 'Por favor, insira um e-mail válido');
+    if (field.type === 'email' && value.length > 0 && !isValidEmail(value)) {
+      this.showError(field, SIGNUP_MESSAGES.email);
       return false;
     }
 
-    if (field.type === 'password' && value.length < 6) {
-      this.showError(field, 'A senha deve ter pelo menos 6 caracteres');
-      return false;
+    if (field.type === 'password') {
+      const minLength = Number(field.getAttribute('minlength')) || 6;
+      if (value.length < minLength) {
+        this.showError(field, SIGNUP_MESSAGES.password);
+        return false;
+      }
     }
 
     return true;
   }
 
-  isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  }
-
   showError(field, message) {
-    if (!field || !field.parentNode) return;
+    if (!field) return;
+
+    const container = field.closest('.form-group') || field.parentElement;
+    if (!container) return;
 
     field.classList.add('error');
+    field.setAttribute('aria-invalid', 'true');
 
-    let errorElement = field.parentNode.querySelector('.error-message');
+    const errorId = `${field.id || field.name}-error`;
+    let errorElement = container.querySelector('.error-message');
+
     if (!errorElement) {
       errorElement = document.createElement('div');
       errorElement.className = 'error-message';
-      field.parentNode.appendChild(errorElement);
+      container.appendChild(errorElement);
     }
 
+    errorElement.id = errorId;
     errorElement.textContent = message;
     errorElement.setAttribute('role', 'alert');
+
+    const describedBy = field.getAttribute('aria-describedby');
+    field.setAttribute(
+      'aria-describedby',
+      describedBy ? `${describedBy} ${errorId}`.trim() : errorId
+    );
   }
 
   clearError(field) {
-    if (!field || !field.parentNode) return;
+    if (!field) return;
+
+    const container = field.closest('.form-group') || field.parentElement;
+    if (!container) return;
 
     field.classList.remove('error');
+    field.removeAttribute('aria-invalid');
 
-    const errorElement = field.parentNode.querySelector('.error-message');
+    const errorElement = container.querySelector('.error-message');
     if (errorElement) {
       errorElement.remove();
+    }
+
+    const describedBy = (field.getAttribute('aria-describedby') || '')
+      .split(' ')
+      .filter(Boolean)
+      .filter(id => !id.endsWith('-error'));
+
+    if (describedBy.length > 0) {
+      field.setAttribute('aria-describedby', describedBy.join(' '));
+    } else {
+      field.removeAttribute('aria-describedby');
     }
   }
 
   async handleSubmit(event) {
-    if (event) {
+    if (event && typeof event.preventDefault === 'function') {
       event.preventDefault();
     }
 
-    // Validar todos os campos
     if (!this.form) return false;
 
-    const fields = this.form.querySelectorAll('input[required]');
-    let isValid = true;
+    const fields = this.getRequiredFields();
+    const invalidFields = [];
 
     fields.forEach(field => {
       if (!this.validateField(field)) {
-        isValid = false;
+        invalidFields.push(field);
       }
     });
 
-    if (!isValid) {
+    if (invalidFields.length > 0) {
+      const firstInvalid = invalidFields[0];
+      if (firstInvalid && typeof firstInvalid.focus === 'function') {
+        firstInvalid.focus();
+      }
       return false;
     }
 
-    // Simular envio
     const submitButton = this.form.querySelector('button[type="submit"]');
     const originalText = submitButton ? submitButton.textContent : '';
 
@@ -257,15 +374,14 @@ class SignupModal {
     }
 
     try {
-      // Aqui viria a chamada real para a API
-      await this.submitForm();
-
-      // Redirecionar para onboarding
-      window.location.href = '/onboarding';
-
+      await this.submitter(new FormData(this.form));
+      this.onSuccess(this.successRedirect);
       return true;
     } catch (error) {
       this.showFormError('Erro ao criar conta. Tente novamente.');
+      if (this.onError) {
+        this.onError(error);
+      }
       return false;
     } finally {
       if (submitButton) {
@@ -277,18 +393,17 @@ class SignupModal {
   }
 
   async submitForm() {
-    // Simular delay de rede
-    return new Promise((resolve) => {
-      setTimeout(resolve, 2000);
+    return new Promise(resolve => {
+      setTimeout(resolve, 600);
     });
   }
 
   showFormError(message) {
-    // Remover erro anterior
+    if (!this.form) return;
+
     const existingError = this.form.querySelector('.form-error');
     if (existingError) existingError.remove();
 
-    // Criar novo erro
     const errorElement = document.createElement('div');
     errorElement.className = 'alert alert-error form-error';
     errorElement.textContent = message;
@@ -298,7 +413,39 @@ class SignupModal {
   }
 }
 
-// Inicializar modal de cadastro
-document.addEventListener('DOMContentLoaded', () => {
-  new SignupModal();
-});
+function initializeModalSystem() {
+  const modalSystem = new ModalSystem();
+  const signupFormManager = new SignupFormManager('#signup-form');
+  return { modalSystem, signupFormManager };
+}
+
+function bootstrapModalComponents() {
+  const instances = initializeModalSystem();
+  if (typeof window !== 'undefined') {
+    window.modalSystem = instances.modalSystem;
+    window.signupFormManager = instances.signupFormManager;
+  }
+  return instances;
+}
+
+if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+  window.ModalSystem = ModalSystem;
+  window.SignupFormManager = SignupFormManager;
+  window.validateSignupData = validateSignupData;
+  window.initializeModalSystem = initializeModalSystem;
+  window.bootstrapModalComponents = bootstrapModalComponents;
+
+  document.addEventListener('DOMContentLoaded', () => {
+    bootstrapModalComponents();
+  });
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = {
+    ModalSystem,
+    SignupFormManager,
+    validateSignupData,
+    initializeModalSystem,
+    bootstrapModalComponents
+  };
+}

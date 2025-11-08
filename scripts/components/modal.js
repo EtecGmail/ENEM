@@ -244,7 +244,7 @@ class SignupFormManager {
     this.onSuccess =
       typeof options.onSuccess === 'function'
         ? options.onSuccess
-        : (url = '', response) => {
+        : (url = '', _response) => {
             if (typeof window !== 'undefined') {
               window.location.href = url;
             }

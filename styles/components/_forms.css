@@ -36,7 +36,7 @@
 .input.error,
 .signup-form input.error {
   border-color: var(--color-error);
-  box-shadow: 0 0 0 2px rgba(255, 71, 93, 0.16);
+  box-shadow: 0 0 0 2px rgb(255 71 93 / 16%);
 }
 
 .checkbox-label {

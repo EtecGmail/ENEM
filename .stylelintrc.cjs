@@ -7,6 +7,7 @@ module.exports = {
         message: 'Use nomes de classe em kebab-case para consistência.'
       }
     ],
-    'color-hex-length': 'short'
+    'color-hex-length': 'short',
+    'media-feature-range-notation': 'prefix'
   }
 };

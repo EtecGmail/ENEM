@@ -1,41 +1,41 @@
 :root {
   /* Cores primárias */
-  --color-primary: #1E3A8A;
-  --color-primary-dark: #162C6A;
-  --color-primary-light: #3456C6;
-  --color-primary-10: rgba(30, 58, 138, 0.1);
+  --color-primary: #1e3a8a;
+  --color-primary-dark: #162c6a;
+  --color-primary-light: #3456c6;
+  --color-primary-10: rgb(30 58 138 / 10%);
   
   /* Cores secundárias */
-  --color-secondary: #0B7A5C;
-  --color-secondary-dark: #075C45;
-  --color-secondary-light: #17A37C;
-  --color-secondary-10: rgba(11, 122, 92, 0.1);
+  --color-secondary: #0b7a5c;
+  --color-secondary-dark: #075c45;
+  --color-secondary-light: #17a37c;
+  --color-secondary-10: rgb(11 122 92 / 10%);
   
   /* Cores neutras */
-  --color-neutral-50: #FAFBFC;
-  --color-neutral-100: #F4F5F7;
-  --color-neutral-200: #E6E8F0;
-  --color-neutral-300: #D7DBE9;
-  --color-neutral-400: #B0B7C3;
-  --color-neutral-500: #8C95A6;
-  --color-neutral-600: #6B7789;
-  --color-neutral-700: #4E5B6C;
-  --color-neutral-800: #33404F;
-  --color-neutral-900: #1A2533;
+  --color-neutral-50: #fafbfc;
+  --color-neutral-100: #f4f5f7;
+  --color-neutral-200: #e6e8f0;
+  --color-neutral-300: #d7dbe9;
+  --color-neutral-400: #b0b7c3;
+  --color-neutral-500: #8c95a6;
+  --color-neutral-600: #6b7789;
+  --color-neutral-700: #4e5b6c;
+  --color-neutral-800: #33404f;
+  --color-neutral-900: #1a2533;
   
   /* Cores de estado */
-  --color-success: #00C389;
-  --color-warning: #FF9F00;
-  --color-error: #FF475D;
-  --color-info: #1E3A8A;
+  --color-success: #00c389;
+  --color-warning: #ff9f00;
+  --color-error: #ff475d;
+  --color-info: #1e3a8a;
   
   /* Cores de fundo */
-  --color-bg-primary: #FFFFFF;
+  --color-bg-primary: #fff;
   --color-bg-secondary: var(--color-neutral-50);
   --color-bg-tertiary: var(--color-neutral-100);
   
   /* Tipografia */
-  --font-family-base: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  --font-family-base: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
   --font-family-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
   
   /* Tamanhos */
@@ -78,10 +78,10 @@
   --radius-xl: 12px;
   
   /* Sombras */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-base: 0 1px 3px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.05);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 5%);
+  --shadow-base: 0 1px 3px rgb(0 0 0 / 10%);
+  --shadow-md: 0 4px 6px rgb(0 0 0 / 5%);
+  --shadow-lg: 0 10px 15px rgb(0 0 0 / 10%);
   
   /* Breakpoints */
   --breakpoint-sm: 640px;

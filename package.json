@@ -3,9 +3,19 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "lint": "node scripts/lint.js",
+    "lint": "npm run lint:js && npm run lint:css && npm run lint:html",
+    "lint:js": "eslint \"scripts/**/*.js\" \"tests/**/*.js\"",
+    "lint:css": "stylelint \"styles/**/*.css\"",
+    "lint:html": "htmlhint index.html onboarding.html",
     "test": "node tests/run-tests.js",
     "build": "npm run lint && npm run test && node scripts/build.js"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-plugin-import": "^2.29.1",
+    "htmlhint": "^1.1.4",
+    "stylelint": "^15.10.3",
+    "stylelint-config-prettier": "^9.0.5",
+    "stylelint-config-standard": "^33.0.0"
+  }
 }

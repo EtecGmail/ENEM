@@ -3,15 +3,23 @@
 ## 📋 Sobre o Projeto
 Plataforma digital de preparação para o ENEM com foco em Língua Portuguesa e Redação, desenvolvida para ser acessível, performática e alinhada com as necessidades reais dos estudantes brasileiros.
 
+## 📚 Documentação viva
+- Limites e SLAs por plano: [`docs/planos-config.json`](docs/planos-config.json) + resumo para conteúdo em [`docs/planos-resumo.md`](docs/planos-resumo.md).
+- Auditoria de promessas vs. capacidade atual: [`docs/promessas-vs-realidade.md`](docs/promessas-vs-realidade.md).
+- Guia de arquitetura e contratos de API: [`docs/arquitetura-backend.md`](docs/arquitetura-backend.md) e [`docs/api-contracts.md`](docs/api-contracts.md).
+- Eventos obrigatórios e compliance LGPD: [`docs/tracking-events.md`](docs/tracking-events.md) e [`docs/lgpd-consent.md`](docs/lgpd-consent.md).
+- Design System e tokens de cor: [`docs/design-system.md`](docs/design-system.md) e [`docs/design-system-components.md`](docs/design-system-components.md).
+
 ## 📜 Regras do Clube de Redação
 ### Quantidade de redações por plano
 - **Plano Essencial**: até 2 redações mensais por estudante.
 - **Plano Avançado**: até 4 redações mensais por estudante.
-- **Plano Premium**: até 8 redações mensais por estudante.
+- **Plano Premium**: até 6 redações mensais por estudante.
 - **Plano B2B/B2G**: limites personalizados mediante contrato, seguindo o cálculo de sustentabilidade descrito na política de limites.
 
 ### SLA de correção
-- Correções entregues em **até 72 horas úteis** para os planos Essencial e Avançado.
+- Correções entregues em **até 96 horas úteis** para o plano Essencial.
+- Correções entregues em **até 72 horas úteis** para o Plano Avançado.
 - Correções entregues em **até 48 horas úteis** para o Plano Premium.
 - Projetos corporativos/governamentais seguem SLA acordado em contrato, com prioridade máxima de 24 horas úteis para demandas emergenciais.
 
@@ -25,6 +33,13 @@ Plataforma digital de preparação para o ENEM com foco em Língua Portuguesa e 
 - Feedback qualitativo por competência, com sugestões de melhoria.
 - Modelo de parágrafo reescrito quando o erro estrutural exigir referência concreta.
 - Plano de estudo personalizado quando identificado padrão de lacuna recorrente.
+
+## 🔧 Qualidade & automação
+- `npm run lint` — executa ESLint, Stylelint e HTMLHint.
+- `npm test` — roda os testes unitários (`tests/run-tests.js`).
+- CI: workflow GitHub Actions (`.github/workflows/ci.yml`) instala dependências, roda lint e testes em cada push/PR.
+
+> Dica: mantenha a documentação em `/docs` sincronizada a cada mudança de produto ou arquitetura para preservar o alinhamento entre landing page e capacidade técnica.
 
 ## ♻️ Política de Limites e Sustentabilidade
 ### Limites por plano

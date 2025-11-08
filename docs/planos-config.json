@@ -1,0 +1,42 @@
+{
+  "version": "2024-06-01",
+  "currency": "BRL",
+  "plans": [
+    {
+      "id": "essencial",
+      "name": "Essencial",
+      "monthlyEssayLimit": 2,
+      "correctionSlaHours": 96,
+      "supportChannels": ["email"],
+      "supportAvailability": "segunda a sexta, 9h-18h",
+      "description": "Entrada no piloto com correção assíncrona e foco em fundamentos."
+    },
+    {
+      "id": "avancado",
+      "name": "Avançado",
+      "monthlyEssayLimit": 4,
+      "correctionSlaHours": 72,
+      "supportChannels": ["email", "forum-comunidade"],
+      "supportAvailability": "segunda a sábado, 9h-18h",
+      "description": "Inclui trilhas guiadas e revisão adicional da equipe pedagógica."
+    },
+    {
+      "id": "premium",
+      "name": "Premium",
+      "monthlyEssayLimit": 6,
+      "correctionSlaHours": 48,
+      "supportChannels": ["email", "whatsapp-prioritario"],
+      "supportAvailability": "segunda a sábado, 8h-20h",
+      "description": "Fila prioritária e plantão de dúvidas em canal dedicado."
+    },
+    {
+      "id": "b2b",
+      "name": "B2B/B2G",
+      "monthlyEssayLimit": null,
+      "correctionSlaHours": null,
+      "supportChannels": ["gestor-dedicado", "sla-contratual"],
+      "supportAvailability": "definido em contrato",
+      "description": "Customização por contrato com métricas definidas por instituição."
+    }
+  ]
+}

@@ -41,6 +41,32 @@
   gap: var(--spacing-3);
 }
 
+.page-feedback {
+  border-radius: var(--radius-md);
+  padding: var(--spacing-3) var(--spacing-4);
+  background-color: var(--color-primary-10);
+  color: var(--color-neutral-800);
+  border-left: 4px solid var(--color-primary);
+  font-weight: var(--font-weight-medium);
+  justify-self: center;
+}
+
+.page-feedback[data-state='success'] {
+  background-color: var(--color-secondary-10);
+  border-left-color: var(--color-secondary);
+  color: var(--color-secondary-dark);
+}
+
+.page-feedback[data-state='error'] {
+  background-color: rgba(255, 71, 93, 0.12);
+  border-left-color: var(--color-error);
+  color: var(--color-error);
+}
+
+.page-feedback[hidden] {
+  display: none;
+}
+
 .hero-features {
   display: grid;
   gap: var(--spacing-3);

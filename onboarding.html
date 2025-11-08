@@ -13,11 +13,16 @@
     <link rel='stylesheet' href='styles/components/_forms.css'>
     <link rel='stylesheet' href='styles/components/_alerts.css'>
     <link rel='stylesheet' href='styles/components/_modal.css'>
+    <link rel='stylesheet' href='styles/components/_skip-links.css'>
     <link rel='stylesheet' href='styles/layouts/_header.css'>
     <link rel='stylesheet' href='styles/layouts/_grid.css'>
     <link rel='stylesheet' href='styles/pages/_landing.css'>
 </head>
 <body>
+    <nav class='skip-links' aria-label='Links para pular para o conteúdo'>
+        <a class='skip-link' href='#onboarding-sucesso'>Ir para os próximos passos</a>
+        <a class='skip-link' href='#contato-imediato'>Ir para contato imediato</a>
+    </nav>
     <div class='app-container'>
         <header class='header'>
             <div class='header-content'>
@@ -33,7 +38,7 @@
                 <div class='section-content'>
                     <div class='section-header'>
                         <h2 id='onboarding-title' class='section-title'>Conta criada com sucesso 🎉</h2>
-                        <p class='section-subtitle'>Preparamos um fluxo simples para você enviar a primeira redação e acompanhar cada devolutiva.</p>
+                        <p class='section-subtitle'>Você agora faz parte do nosso piloto controlado. Veja abaixo como funcionam os próximos passos, como usamos seus dados e quais são os prazos de retorno.</p>
                     </div>
 
                     <div class='process-grid'>
@@ -54,14 +59,36 @@
                         </article>
                     </div>
 
-                    <div class='hero-actions'>
-                        <a class='btn-primary btn-large' href='index.html#planos'>Explorar planos e upgrades</a>
-                        <a class='btn-ghost btn-large' href='index.html'>Voltar para a landing</a>
+                    <div class='legal-card'>
+                        <h3>Piloto 2024 · expectativas claras</h3>
+                        <ul>
+                            <!-- Produto: limites completos documentados em docs/planos-config.json. -->
+                            <li>Correções liberadas em até 96h úteis no Essencial, 72h no Avançado e 48h no Premium.</li>
+                            <li>Usamos seus dados para personalizar feedbacks e gerar métricas agregadas; todo tratamento respeita os termos de consentimento versionado.</li>
+                            <li>Você pode solicitar ajuste de plano ou exclusão definitiva a qualquer momento pelo e-mail do suporte.</li>
+                        </ul>
+                        <!-- Produto: eventos mínimos descritos em docs/tracking-events.md. -->
+                        <p>Ao prosseguir, você autoriza o registro dos eventos mínimos do produto para auditoria pedagógica e legal.</p>
                     </div>
 
-                    <div class='legal-card' role='complementary'>
-                        <h3>Precisa de ajuda?</h3>
-                        <p>Nosso time de suporte responde em até 24h úteis pelo e-mail <a href='mailto:suporte@redacaomais.com'>suporte@redacaomais.com</a> ou WhatsApp em horário comercial.</p>
+                    <div class='hero-actions'>
+                        <a class='btn-primary btn-large' href='index.html#planos'>Explorar planos e upgrades</a>
+                        <a class='btn-ghost btn-large' href='#contato-imediato'>Precisa de ajuda agora?</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class='section' id='contato-imediato' aria-labelledby='contato-imediato-titulo'>
+                <div class='section-content'>
+                    <div class='legal-card'>
+                        <h3 id='contato-imediato-titulo'>Precisa de ajuda agora?</h3>
+                        <p>Escolha o canal que responde mais rápido para o seu caso. Os horários respeitam os limites definidos para cada plano.</p>
+                        <ul>
+                            <li>E-mail: <a href='mailto:suporte@redacaomais.com'>suporte@redacaomais.com</a> — retorno em até 24h úteis.</li>
+                            <li>WhatsApp prioritário: <a href='https://wa.me/5511999999999'>+55 11 99999-9999</a> — segunda a sábado, 8h às 20h.</li>
+                            <li>FAQ resumido: solicite o PDF atualizado pelo e-mail <a href='mailto:conteudo@redacaomais.com'>conteudo@redacaomais.com</a>.</li>
+                        </ul>
+                        <p>Caso o assunto seja LGPD, informe "LGPD" no assunto para prioridade automática.</p>
                     </div>
                 </div>
             </section>

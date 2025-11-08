@@ -5,6 +5,39 @@ const SIGNUP_MESSAGES = {
   consent: 'Você precisa concordar com o tratamento dos dados para continuar.'
 };
 
+function createFallbackApi() {
+  const error = new Error('Serviço de API indisponível.');
+  const reject = () => Promise.reject(error);
+  return {
+    signup: reject,
+    assignPlan: reject,
+    registerConsent: reject,
+    submitEssay: reject,
+    listEssays: reject,
+    listPlans: reject,
+    emitEvent: reject
+  };
+}
+
+function resolveApiService(customApi) {
+  if (customApi) return customApi;
+
+  if (typeof window !== 'undefined' && window.apiService) {
+    return window.apiService;
+  }
+
+  if (typeof require === 'function') {
+    try {
+      const { createApiService } = require('../services/api.js');
+      return createApiService({ useMock: true });
+    } catch (error) {
+      return createFallbackApi();
+    }
+  }
+
+  return createFallbackApi();
+}
+
 function isValidEmail(email = '') {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
@@ -203,12 +236,15 @@ class SignupFormManager {
       ? document.querySelector(formSelector)
       : formSelector;
 
-    this.submitter = options.submitter || (formData => this.submitForm(formData));
+    this.api = resolveApiService(options.api);
+    this.globalFeedbackRegion = options.globalFeedbackRegion || null;
+    this.submitter =
+      options.submitter || (formData => this.api.signup(formData));
     this.successRedirect = options.successRedirect || 'onboarding.html';
     this.onSuccess =
       typeof options.onSuccess === 'function'
         ? options.onSuccess
-        : url => {
+        : (url = '', response) => {
             if (typeof window !== 'undefined') {
               window.location.href = url;
             }
@@ -229,6 +265,33 @@ class SignupFormManager {
   getRequiredFields() {
     if (!this.form) return [];
     return Array.from(this.form.querySelectorAll('input[required]'));
+  }
+
+  getGlobalFeedbackRegion() {
+    if (this.globalFeedbackRegion) return this.globalFeedbackRegion;
+    if (typeof document === 'undefined') return null;
+    this.globalFeedbackRegion = document.getElementById('signup-feedback');
+    return this.globalFeedbackRegion;
+  }
+
+  updateGlobalFeedback(type, message) {
+    const region = this.getGlobalFeedbackRegion();
+    if (!region) return;
+
+    if (!message) {
+      region.textContent = '';
+      region.setAttribute('hidden', '');
+      region.removeAttribute('role');
+      region.removeAttribute('data-state');
+      region.setAttribute('aria-live', 'polite');
+      return;
+    }
+
+    region.textContent = message;
+    region.dataset.state = type || 'info';
+    region.removeAttribute('hidden');
+    region.setAttribute('role', type === 'error' ? 'alert' : 'status');
+    region.setAttribute('aria-live', type === 'error' ? 'assertive' : 'polite');
   }
 
   setupValidation() {
@@ -347,6 +410,7 @@ class SignupFormManager {
 
     if (!this.form) return false;
 
+    this.updateGlobalFeedback(null, '');
     const fields = this.getRequiredFields();
     const invalidFields = [];
 
@@ -370,15 +434,39 @@ class SignupFormManager {
     if (submitButton) {
       submitButton.classList.add('loading');
       submitButton.disabled = true;
-      submitButton.textContent = 'Criando conta...';
+      submitButton.textContent = 'Enviando…';
+      submitButton.setAttribute('aria-busy', 'true');
     }
 
     try {
-      await this.submitter(new FormData(this.form));
-      this.onSuccess(this.successRedirect);
+      const formData = new FormData(this.form);
+      const response = await this.submitter(formData);
+      const status = response && typeof response.status === 'number' ? response.status : 0;
+
+      if (status < 200 || status >= 300) {
+        throw new Error('Resposta inesperada da API');
+      }
+
+      this.updateGlobalFeedback(
+        'success',
+        'Conta criada! Confira seu e-mail para confirmar a participação no piloto.'
+      );
+
+      if (typeof this.form.reset === 'function') {
+        this.form.reset();
+      }
+
+      if (this.successRedirect) {
+        setTimeout(() => this.onSuccess(this.successRedirect, response), 1200);
+      }
+
       return true;
     } catch (error) {
       this.showFormError('Erro ao criar conta. Tente novamente.');
+      this.updateGlobalFeedback(
+        'error',
+        'Não foi possível concluir seu cadastro agora. Tente novamente em instantes.'
+      );
       if (this.onError) {
         this.onError(error);
       }
@@ -388,6 +476,7 @@ class SignupFormManager {
         submitButton.classList.remove('loading');
         submitButton.disabled = false;
         submitButton.textContent = originalText;
+        submitButton.removeAttribute('aria-busy');
       }
     }
   }
@@ -446,6 +535,7 @@ if (typeof module !== 'undefined' && module.exports) {
     SignupFormManager,
     validateSignupData,
     initializeModalSystem,
-    bootstrapModalComponents
+    bootstrapModalComponents,
+    resolveApiService
   };
 }

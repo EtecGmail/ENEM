@@ -1,7 +1,9 @@
 const { validateSignupData } = require('../scripts/components/modal.js');
+const { createApiService } = require('../scripts/services/api.js');
 const { createPlanScrollHandler } = require('../scripts/pages/onboarding.js');
 
 let hasFailure = false;
+const tests = [];
 
 function assert(condition, message) {
   if (!condition) {
@@ -10,14 +12,7 @@ function assert(condition, message) {
 }
 
 function test(name, fn) {
-  try {
-    fn();
-    console.log(`✔ ${name}`);
-  } catch (error) {
-    hasFailure = true;
-    console.error(`✖ ${name}`);
-    console.error(error.message);
-  }
+  tests.push({ name, fn });
 }
 
 test('Validação exige consentimento expresso', () => {
@@ -69,9 +64,39 @@ test('CTA chama scroll para a seção de planos', () => {
   assert(scrollCalls[0] && scrollCalls[0].behavior === 'smooth', 'Scroll deve ser suave.');
 });
 
-if (hasFailure) {
-  console.error('\nAlguns testes falharam.');
-  process.exit(1);
-} else {
-  console.log('\nTodos os testes passaram.');
-}
+test('Serviço de API mock cria usuário com sucesso', async () => {
+  const api = createApiService({ useMock: true, delay: 0 });
+  const response = await api.signup({ email: 'ana@example.com', plano: 'essencial' });
+
+  assert(response.status === 201, 'Cadastro deve retornar status 201.');
+  assert(response.data && response.data.data.id, 'Resposta deve conter ID de usuário.');
+});
+
+test('Serviço de API mock lista planos com limites definidos', async () => {
+  const api = createApiService({ useMock: true, delay: 0 });
+  const response = await api.listPlans();
+
+  assert(response.status === 200, 'Listagem de planos deve retornar status 200.');
+  assert(Array.isArray(response.data.data), 'Resposta deve conter array de planos.');
+  assert(response.data.data.length === 3, 'Devem existir 3 planos mockados.');
+});
+
+(async function run() {
+  for (const { name, fn } of tests) {
+    try {
+      await fn();
+      console.log(`✔ ${name}`);
+    } catch (error) {
+      hasFailure = true;
+      console.error(`✖ ${name}`);
+      console.error(error.message);
+    }
+  }
+
+  if (hasFailure) {
+    console.error('\nAlguns testes falharam.');
+    process.exit(1);
+  } else {
+    console.log('\nTodos os testes passaram.');
+  }
+})();

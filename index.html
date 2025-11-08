@@ -15,6 +15,7 @@
     <link rel='stylesheet' href='styles/components/_forms.css'>
     <link rel='stylesheet' href='styles/components/_alerts.css'>
     <link rel='stylesheet' href='styles/components/_modal.css'>
+    <link rel='stylesheet' href='styles/components/_skip-links.css'>
     <link rel='stylesheet' href='styles/layouts/_header.css'>
     <link rel='stylesheet' href='styles/layouts/_sidebar.css'>
     <link rel='stylesheet' href='styles/layouts/_grid.css'>
@@ -22,6 +23,16 @@
     <link rel='stylesheet' href='styles/pages/_landing.css'>
 </head>
 <body>
+    <!-- Skip links (UX spec):
+        1. "Ir para o conteúdo principal" → #conteudo-principal
+        2. "Ir para os planos" → #planos
+        3. "Ir para o formulário de cadastro" → #cta-main (botão que abre o modal de cadastro)
+    -->
+    <nav class='skip-links' aria-label='Links para pular para o conteúdo'>
+        <a class='skip-link' href='#conteudo-principal'>Ir para o conteúdo principal</a>
+        <a class='skip-link' href='#planos'>Ir para os planos</a>
+        <a class='skip-link' href='#cta-main'>Ir para o formulário de cadastro</a>
+    </nav>
     <div class='app-container'>
         <!-- Header -->
         <header class='header' role='banner'>
@@ -57,7 +68,7 @@
         </header>
 
         <!-- Main Content -->
-        <main class='main-content' role='main'>
+        <main class='main-content' role='main' id='conteudo-principal'>
             <!-- Hero Section -->
             <section class='hero' id='inicio' aria-labelledby='hero-title'>
                 <div class='hero-content'>
@@ -83,6 +94,9 @@
                         </button>
                     </div>
 
+                    <div class='page-feedback' id='signup-feedback' aria-live='polite' hidden></div>
+
+                    <!-- Produto: validar SLA de 48h, plano de estudos automático e auditoria LGPD (ver docs/promessas-vs-realidade.md). -->
                     <div class='hero-features'>
                         <div class='feature-item'>
                             <span class='feature-icon'>🎯</span>
@@ -156,6 +170,7 @@
                         <article class='audience-card'>
                             <h3>Escola Particular</h3>
                             <ul>
+                                <!-- Produto: roadmap - integração LMS, relatórios e capacitação dependem de stack descrita em docs/arquitetura-backend.md. -->
                                 <li>Integração com LMS e dashboards por turma</li>
                                 <li>Capacitação docente e relatórios trimestrais</li>
                                 <li>Créditos extras para simulações intensivas</li>
@@ -218,6 +233,7 @@
                     </div>
 
                     <div class='feedback-wrapper'>
+                        <!-- Produto: exemplo de feedback é mockup - alinhar storytelling com dados reais antes de publicar. -->
                         <article class='feedback-card' aria-label='Exemplo de feedback de redação'>
                             <div class='feedback-header'>
                                 <div>
@@ -291,7 +307,7 @@
                             <div class='plan-header'>
                                 <span class='plan-name'>Essencial</span>
                                 <span class='plan-price'>R$ 97/mês</span>
-                                <span class='plan-tagline'>Até 2 redações mensais · Correção em 72h úteis</span>
+                                <span class='plan-tagline'>Até 2 redações mensais · Correção em até 96h úteis</span>
                             </div>
                             <ul class='plan-features'>
                                 <li>Feedback completo com plano de estudo personalizado</li>
@@ -308,6 +324,7 @@
                                 <span class='plan-tagline'>Até 4 redações mensais · Correção em 72h úteis</span>
                             </div>
                             <ul class='plan-features'>
+                                <!-- Produto: mentorias e indicadores personalizados precisam de equipe dedicada (ver docs/promessas-vs-realidade.md). -->
                                 <li>Mentorias coletivas mensais com a equipe pedagógica</li>
                                 <li>Monitoramento de evolução com indicadores personalizados</li>
                                 <li>Créditos extras com 10% de desconto</li>
@@ -319,7 +336,7 @@
                             <div class='plan-header'>
                                 <span class='plan-name'>Premium</span>
                                 <span class='plan-price'>R$ 247/mês</span>
-                                <span class='plan-tagline'>Até 8 redações mensais · Correção em 48h úteis</span>
+                                <span class='plan-tagline'>Até 6 redações mensais · Correção em 48h úteis</span>
                             </div>
                             <ul class='plan-features'>
                                 <li>Prioridade máxima na fila de correção</li>
@@ -368,6 +385,7 @@
                             <h3 id='termos-title'>Termos de Uso</h3>
                             <p>O serviço é renovado mensalmente, com cancelamento simples e sem multas. Você mantém o acesso às correções até o fim do período vigente.</p>
                             <ul>
+                                <!-- Produto: emissão automática de NF e bloqueio por compartilhamento exigem backend - alinhar com docs/api-contracts.md e docs/db-schema.md. -->
                                 <li>Pagamentos recorrentes mensais ou anuais, com nota fiscal emitida automaticamente.</li>
                                 <li>Reembolso integral até 7 dias após a contratação inicial.</li>
                                 <li>Uso exclusivo para fins educacionais. Compartilhamento de login bloqueia o acesso.</li>
@@ -421,6 +439,7 @@
                 <div class='footer-section'>
                     <h4>Contato</h4>
                     <ul>
+                        <!-- Produto: confirmar canal oficial de WhatsApp e horários antes de divulgar. -->
                         <li><a href="mailto:suporte@redacaomais.com">suporte@redacaomais.com</a></li>
                         <li><a href="https://wa.me/5511999999999">WhatsApp</a></li>
                     </ul>
@@ -504,6 +523,7 @@
 
     <!-- Scripts -->
     <script src='scripts/utils/accessibility.js'></script>
+    <script src='scripts/services/api.js'></script>
     <script src='scripts/components/modal.js'></script>
     <script src='scripts/pages/onboarding.js'></script>
 </body>

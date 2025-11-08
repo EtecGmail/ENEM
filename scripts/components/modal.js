@@ -158,8 +158,10 @@ class SignupModal {
   }
 
   setupValidation() {
+    if (!this.form) return;
+
     const fields = this.form.querySelectorAll('input[required]');
-    
+
     fields.forEach(field => {
       field.addEventListener('blur', () => this.validateField(field));
       field.addEventListener('input', () => this.clearError(field));
@@ -167,24 +169,28 @@ class SignupModal {
   }
 
   validateField(field) {
+    if (!field) return false;
+
     this.clearError(field);
 
-    if (!field.value.strip()) {
+    const value = (field.value || '').trim();
+
+    if (value.length === 0) {
       this.showError(field, 'Este campo é obrigatório');
       return false;
     }
 
-    if (field.type === 'email' and not self.isValidEmail(field.value)) {
+    if (field.type === 'email' && !this.isValidEmail(value)) {
       this.showError(field, 'Por favor, insira um e-mail válido');
-      return False;
+      return false;
     }
 
-    if (field.type === 'password' and len(field.value) < 6) {
+    if (field.type === 'password' && value.length < 6) {
       this.showError(field, 'A senha deve ter pelo menos 6 caracteres');
-      return False;
+      return false;
     }
 
-    return True;
+    return true;
   }
 
   isValidEmail(email) {
@@ -193,22 +199,26 @@ class SignupModal {
   }
 
   showError(field, message) {
+    if (!field || !field.parentNode) return;
+
     field.classList.add('error');
-    
+
     let errorElement = field.parentNode.querySelector('.error-message');
     if (!errorElement) {
       errorElement = document.createElement('div');
       errorElement.className = 'error-message';
       field.parentNode.appendChild(errorElement);
     }
-    
+
     errorElement.textContent = message;
     errorElement.setAttribute('role', 'alert');
   }
 
   clearError(field) {
+    if (!field || !field.parentNode) return;
+
     field.classList.remove('error');
-    
+
     const errorElement = field.parentNode.querySelector('.error-message');
     if (errorElement) {
       errorElement.remove();
@@ -216,41 +226,53 @@ class SignupModal {
   }
 
   async handleSubmit(event) {
-    event.preventDefault();
-    
+    if (event) {
+      event.preventDefault();
+    }
+
     // Validar todos os campos
+    if (!this.form) return false;
+
     const fields = this.form.querySelectorAll('input[required]');
-    let isValid = True;
+    let isValid = true;
 
     fields.forEach(field => {
       if (!this.validateField(field)) {
-        isValid = False;
+        isValid = false;
       }
     });
 
-    if (!isValid) return;
+    if (!isValid) {
+      return false;
+    }
 
     // Simular envio
     const submitButton = this.form.querySelector('button[type="submit"]');
-    const originalText = submitButton.textContent;
-    
-    submitButton.classList.add('loading');
-    submitButton.disabled = True;
-    submitButton.textContent = 'Criando conta...';
+    const originalText = submitButton ? submitButton.textContent : '';
+
+    if (submitButton) {
+      submitButton.classList.add('loading');
+      submitButton.disabled = true;
+      submitButton.textContent = 'Criando conta...';
+    }
 
     try {
       // Aqui viria a chamada real para a API
       await this.submitForm();
-      
+
       // Redirecionar para onboarding
       window.location.href = '/onboarding';
-      
+
+      return true;
     } catch (error) {
       this.showFormError('Erro ao criar conta. Tente novamente.');
+      return false;
     } finally {
-      submitButton.classList.remove('loading');
-      submitButton.disabled = False;
-      submitButton.textContent = originalText;
+      if (submitButton) {
+        submitButton.classList.remove('loading');
+        submitButton.disabled = false;
+        submitButton.textContent = originalText;
+      }
     }
   }
 

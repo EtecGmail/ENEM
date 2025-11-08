@@ -42,7 +42,14 @@
 
                 <div class='user-menu'>
                     <button class='btn-ghost' id='login-btn'>Entrar</button>
-                    <button class='btn-primary' id='signup-btn'>Começar agora</button>
+                    <button
+                        class='btn-primary'
+                        id='signup-btn'
+                        type='button'
+                        data-target='signup-modal'
+                    >
+                        Começar agora
+                    </button>
                 </div>
             </div>
         </header>
@@ -61,7 +68,12 @@
                     </p>
                     
                     <div class='hero-actions'>
-                        <button class='btn-primary btn-large' id='cta-main'>
+                        <button
+                            class='btn-primary btn-large'
+                            id='cta-main'
+                            type='button'
+                            data-target='signup-modal'
+                        >
                             Criar minha conta gratuita
                         </button>
                         <button class='btn-ghost btn-large' id='cta-secondary'>
@@ -147,9 +159,22 @@
     </div>
 
     <!-- Modal de Cadastro -->
-    <div class='modal-overlay' id='signup-modal' aria-hidden='true' role='dialog'>
+    <div
+        class='modal-overlay'
+        id='signup-modal'
+        aria-hidden='true'
+        role='dialog'
+        data-modal
+    >
         <div class='modal-content'>
-            <button class='modal-close' aria-label='Fechar modal'>×</button>
+            <button
+                class='modal-close'
+                aria-label='Fechar modal'
+                type='button'
+                data-dismiss='modal'
+            >
+                ×
+            </button>
             
             <h2>Comece agora gratuitamente</h2>
             <p>Preencha os dados abaixo para criar sua conta</p>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang='pt-BR'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Redação+ - Plataforma ENEM</title>
+    <meta name='description' content='Plataforma de preparação para ENEM com foco em Português e Redação'>
+    
+    <!-- CSS -->
+    <link rel='stylesheet' href='styles/base/_reset.css'>
+    <link rel='stylesheet' href='styles/base/_tokens.css'>
+    <link rel='stylesheet' href='styles/base/_typography.css'>
+    <link rel='stylesheet' href='styles/components/_buttons.css'>
+    <link rel='stylesheet' href='styles/components/_cards.css'>
+    <link rel='stylesheet' href='styles/components/_forms.css'>
+    <link rel='stylesheet' href='styles/components/_alerts.css'>
+    <link rel='stylesheet' href='styles/components/_modal.css'>
+    <link rel='stylesheet' href='styles/layouts/_header.css'>
+    <link rel='stylesheet' href='styles/layouts/_sidebar.css'>
+    <link rel='stylesheet' href='styles/layouts/_grid.css'>
+    <link rel='stylesheet' href='styles/layouts/_navigation.css'>
+    <link rel='stylesheet' href='styles/pages/_dashboard.css'>
+</head>
+<body>
+    <div class='app-container'>
+        <!-- Header -->
+        <header class='header' role='banner'>
+            <div class='header-content'>
+                <div class='logo'>
+                    <h1>Redação+</h1>
+                    <span class='tagline'>Plataforma ENEM</span>
+                </div>
+                
+                <nav class='main-nav' aria-label='Navegação principal'>
+                    <ul class='nav-list'>
+                        <li><a href='#inicio' class='nav-link active'>Início</a></li>
+                        <li><a href='#trilhas' class='nav-link'>Trilhas</a></li>
+                        <li><a href='#redacao' class='nav-link'>Redação</a></li>
+                        <li><a href='#simulados' class='nav-link'>Simulados</a></li>
+                    </ul>
+                </nav>
+
+                <div class='user-menu'>
+                    <button class='btn-ghost' id='login-btn'>Entrar</button>
+                    <button class='btn-primary' id='signup-btn'>Começar agora</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class='main-content' role='main'>
+            <!-- Hero Section -->
+            <section class='hero' aria-labelledby='hero-title'>
+                <div class='hero-content'>
+                    <h1 id='hero-title' class='hero-title'>
+                        Chegou sua hora de brilhar no ENEM
+                    </h1>
+                    <p class='hero-subtitle'>
+                        Aprenda Português e Redação com quem entende do assunto. 
+                        Metodologia humanizada que se adapta à sua realidade.
+                    </p>
+                    
+                    <div class='hero-actions'>
+                        <button class='btn-primary btn-large' id='cta-main'>
+                            Criar minha conta gratuita
+                        </button>
+                        <button class='btn-ghost btn-large' id='cta-secondary'>
+                            Conhecer a plataforma
+                        </button>
+                    </div>
+
+                    <div class='hero-features'>
+                        <div class='feature-item'>
+                            <span class='feature-icon'>🎯</span>
+                            <span>Correção de redação humanizada</span>
+                        </div>
+                        <div class='feature-item'>
+                            <span class='feature-icon'>⏱️</span>
+                            <span>Para quem tem pouco tempo</span>
+                        </div>
+                        <div class='feature-item'>
+                            <span class='feature-icon'>📱</span>
+                            <span>Funciona no celular</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section class='features' aria-labelledby='features-title'>
+                <h2 id='features-title' class='section-title'>Como vamos te ajudar a chegar na nota 1000</h2>
+                
+                <div class='features-grid'>
+                    <div class='feature-card'>
+                        <div class='feature-icon'>✍️</div>
+                        <h3>Redação Comentada</h3>
+                        <p>Correções detalhadas por competências do ENEM, com sugestões práticas de melhoria</p>
+                    </div>
+                    
+                    <div class='feature-card'>
+                        <div class='feature-icon'>📚</div>
+                        <h3>Trilhas Personalizadas</h3>
+                        <p>Conteúdo organizado de acordo com seu nível e objetivos de estudo</p>
+                    </div>
+                    
+                    <div class='feature-card'>
+                        <div class='feature-icon'>🎥</div>
+                        <h3>Aulas Objetivas</h3>
+                        <p>Videoaulas curtas e direto ao ponto, perfeitas para estudar no ônibus</p>
+                    </div>
+                    
+                    <div class='feature-card'>
+                        <div class='feature-icon'>📊</div>
+                        <h3>Monitoramento de Evolução</h3>
+                        <p>Acompanhe seu progresso com relatórios simples e claros</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class='footer' role='contentinfo'>
+            <div class='footer-content'>
+                <div class='footer-section'>
+                    <h3>Redação+</h3>
+                    <p>Democratizando o acesso à educação de qualidade para o ENEM</p>
+                </div>
+                
+                <div class='footer-section'>
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href='#termos'>Termos de Uso</a></li>
+                        <li><a href='#privacidade'>Política de Privacidade</a></li>
+                        <li><a href='#lgpd'>LGPD</a></li>
+                    </ul>
+                </div>
+                
+                <div class='footer-section'>
+                    <h4>Contato</h4>
+                    <ul>
+                        <li><a href="mailto:suporte@redacaomais.com">suporte@redacaomais.com</a></li>
+                        <li><a href="https://wa.me/5511999999999">WhatsApp</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal de Cadastro -->
+    <div class='modal-overlay' id='signup-modal' aria-hidden='true' role='dialog'>
+        <div class='modal-content'>
+            <button class='modal-close' aria-label='Fechar modal'>×</button>
+            
+            <h2>Comece agora gratuitamente</h2>
+            <p>Preencha os dados abaixo para criar sua conta</p>
+            
+            <form class='signup-form' id='signup-form'>
+                <div class='form-group'>
+                    <label for='nome-completo' class='form-label'>Nome completo</label>
+                    <input type='text' id='nome-completo' name='nome-completo' class='input' required>
+                </div>
+                
+                <div class='form-group'>
+                    <label for='email' class='form-label'>E-mail</label>
+                    <input type='email' id='email' name='email' class='input' required>
+                </div>
+                
+                <div class='form-group'>
+                    <label for='senha' class='form-label'>Senha</label>
+                    <input type='password' id='senha' name='senha' class='input' required minlength='6'>
+                    <small class='form-help'>Mínimo 6 caracteres</small>
+                </div>
+                
+                <div class='form-group'>
+                    <label class='checkbox-label'>
+                        <input type='checkbox' name='lgpd' required>
+                        <span>Concordo com os <a href='#termos'>Termos de Uso</a> e <a href='#privacidade'>Política de Privacidade</a></span>
+                    </label>
+                </div>
+                
+                <button type='submit' class='btn-primary btn-full'>Criar conta</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src='scripts/utils/accessibility.js'></script>
+    <script src='scripts/components/modal.js'></script>
+    <script src='scripts/pages/onboarding.js'></script>
+</body>
+</html>

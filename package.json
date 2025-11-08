@@ -1,0 +1,11 @@
+{
+  "name": "enem-landing",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "lint": "node scripts/lint.js",
+    "test": "node tests/run-tests.js",
+    "build": "npm run lint && npm run test && node scripts/build.js"
+  },
+  "devDependencies": {}
+}

@@ -1,0 +1,138 @@
+:root {
+  /* Cores primárias */
+  --color-primary: #1e3a8a;
+  --color-primary-dark: #162c6a;
+  --color-primary-light: #3456c6;
+  --color-primary-10: rgb(30 58 138 / 10%);
+  
+  /* Cores secundárias */
+  --color-secondary: #0b7a5c;
+  --color-secondary-dark: #075c45;
+  --color-secondary-light: #17a37c;
+  --color-secondary-10: rgb(11 122 92 / 10%);
+  
+  /* Cores neutras */
+  --color-neutral-50: #fafbfc;
+  --color-neutral-100: #f4f5f7;
+  --color-neutral-200: #e6e8f0;
+  --color-neutral-300: #d7dbe9;
+  --color-neutral-400: #b0b7c3;
+  --color-neutral-500: #8c95a6;
+  --color-neutral-600: #6b7789;
+  --color-neutral-700: #4e5b6c;
+  --color-neutral-800: #33404f;
+  --color-neutral-900: #1a2533;
+  
+  /* Cores de estado */
+  --color-success: #00c389;
+  --color-warning: #ff9f00;
+  --color-error: #ff475d;
+  --color-info: #1e3a8a;
+  
+  /* Cores de fundo */
+  --color-bg-primary: #fff;
+  --color-bg-secondary: var(--color-neutral-50);
+  --color-bg-tertiary: var(--color-neutral-100);
+  
+  /* Tipografia */
+  --font-family-base: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
+  --font-family-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+  
+  /* Tamanhos */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  
+  /* Pesos */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* Line heights */
+  --line-height-tight: 1.25;
+  --line-height-base: 1.5;
+  --line-height-loose: 1.75;
+  
+  /* Espaçamentos */
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
+  --spacing-20: 5rem;
+  
+  /* Border radius */
+  --radius-sm: 2px;
+  --radius-base: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  
+  /* Sombras */
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 5%);
+  --shadow-base: 0 1px 3px rgb(0 0 0 / 10%);
+  --shadow-md: 0 4px 6px rgb(0 0 0 / 5%);
+  --shadow-lg: 0 10px 15px rgb(0 0 0 / 10%);
+  
+  /* Breakpoints */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  
+  /* Z-index */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+}
+
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: var(--color-neutral-800);
+  background-color: var(--color-bg-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Foco acessível */
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Redução de movimento */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
